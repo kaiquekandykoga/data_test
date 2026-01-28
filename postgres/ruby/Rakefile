@@ -1,8 +1,17 @@
 # Temporarily setting ENV variables due creating
 # containers with https://github.com/kaiquekandykoga/for_nerdctl
+ENV["DATA_TEST_PG_PORT"] ||= "5430"
 
-desc "Connect to the PostgreSQL database"
+desc "Connect to the database"
 task :connect do
-  ENV["DATA_TEST_PG_PORT"] ||= "5430"
-  ruby "connect_database.rb"
+  ARGV.clear
+  ARGV << "connect_database"
+  load "postgres_ruby.rb"
+end
+
+desc "Create table"
+task :create_table do
+  ARGV.clear
+  ARGV << "create_table"
+  load "postgres_ruby.rb"
 end
