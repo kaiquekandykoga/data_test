@@ -1,0 +1,8 @@
+# Temporarily setting ENV variables due creating
+# containers with https://github.com/kaiquekandykoga/for_nerdctl
+
+desc "Connect to the PostgreSQL database"
+task :connect do
+  ENV["DATA_TEST_PG_PORT"] ||= "5430"
+  ruby "connect_database.rb"
+end
